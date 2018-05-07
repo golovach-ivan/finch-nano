@@ -1,0 +1,22 @@
+ContentType: Literal/Singleton Type <: String
+    // why not subtypes of 'class ContentType'?
+
+Encode: (A, ContentType) => Array[Byte]
+    // why not ContentType in existential position?
+
+ToResponse: (A, ContentType) => Response
+
+Accept
+    (primary: String, sub: String, matches: ContentType => Boolean)
+Accept.Matcher
+Negotiable[A, ContentType]: Seq[Accept] => ToResponse[A, ContentType]
+
+===
+Stage #0
+- add param[A] combinator
+Stage #1
+- add Tuple ~> Foo converters
+- add Bar ~> Tuple converters
+Stage #2
+- add exceptions
+- add negotiable
